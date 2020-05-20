@@ -15,6 +15,9 @@
 	<!--表示只掃描@Controller註解  -->
 		<context:include-filter type="annotation" 
 		expression="org.springframework.stereotype.Controller"/>
+		
+		<context:include-filter type="annotation" 
+		expression="org.springframework.web.bind.annotation.RestController"/>
 	</context:component-scan>	
 	
 	<!--開啟spring mvc配置  -->
@@ -25,11 +28,11 @@
 	<!--将静态资源(css,js)等交给servlet容器内置的名字叫做default-servlet-handler  -->
 	<mvc:default-servlet-handler/>
 	
-	<!--定制静态资源位置和访问了路径  -->
-	<mvc:resources location="classpath:static/" mapping="/s/**"/>
+	<!--定制静态资源位置和访问路径  -->
+	<mvc:resources location="classpath:/static/" mapping="/s/**"/>
 	
-	<mvc:resources location="file:d:/upload/" mapping="/pic/**"/>
 	<!--视图解析器  -->
+	<mvc:resources location="file:d:/upload/" mapping="/pic/**"/>
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/pages/"/>
 		<property name="suffix" value=".jsp"/>	
