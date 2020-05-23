@@ -19,6 +19,17 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
+  <listener>
+  	<listener-class>
+  		org.springframework.web.context.ContextLoaderListener
+  	</listener-class>
+  </listener>
+  <!--如果不配置这个参数 那么contextConfigLoader   -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:spring-root.xml</param-value>
+  </context-param>
+  
   <!--前端控制器   -->
   <servlet>
   	<servlet-name>et</servlet-name>

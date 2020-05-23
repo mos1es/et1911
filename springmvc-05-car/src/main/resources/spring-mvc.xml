@@ -18,6 +18,13 @@
 		
 		<context:include-filter type="annotation" 
 		expression="org.springframework.web.bind.annotation.RestController"/>
+		
+		<!--排除@Service @Repository  -->
+		<context:exclude-filter type="annotation" 
+		expression="org.springframework.stereotype.Service"/>
+		
+		<context:exclude-filter type="annotation" 
+		expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan>
 	
 	<!--2.开启mvc配置  -->
@@ -25,6 +32,9 @@
 	
 	<!--3.静态文件由Servlet容器处 -->
 	<mvc:default-servlet-handler/>
+	
+	<!-- 定义图片访问方式  -->
+	<mvc:resources location="file:d:/upload/" mapping="/pic/**"/>
 
 	<!--整合thymeleaf  -->
 	<bean id="templateResolver" 
@@ -39,13 +49,19 @@
 	
 	<bean id="templateEngine"
 	class="org.thymeleaf.spring5.SpringTemplateEngine">
-		<property name="templateResolver"
-		ref="templateResolver"></property>
+		<property name="templateResolver" ref="templateResolver"/>
 	</bean>
 	
 	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine"/>
 		<property name="characterEncoding" value="UTF-8"/>
+	</bean>
+	
+	<!--文件上传解析器  -->
+	<bean id="multipartResolver"
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 文件上传限制2M -->
+		<property name="maxUploadSize" value="2097152"></property>
 	</bean>
 	
 </beans>
