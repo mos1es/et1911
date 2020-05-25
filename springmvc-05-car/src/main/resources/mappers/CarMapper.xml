@@ -1,34 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
- <mapper namespace="com.etoak.mapper.CarMapper">
- 	<insert id="addCar" parameterType="Car">
- 		insert into t_springmvc_car(
- 			brand,
- 			series,
- 			price,
- 			licensing_time,
- 			level,
- 			gearbox,
- 			output_volume,
- 			mileage,
- 			location,
- 			pic, 
- 			summary,
- 			create_time
- 		)values(
- 			#{brand},
- 			#{series},
- 			#{price},
- 			#{licensingTime},
- 			#{level},
- 			#{gearbox},
- 			#{outputVolume},
- 			#{mileage},
- 			#{location},
- 			#{pic}, 
- 			#{summary},
- 			NOW()
- 		)
- 	</insert>
- </mapper>
+<mapper namespace="com.etoak.mapper.CarMapper">
+
+	<insert id="addCar" parameterType="Car">
+		insert into t_springmvc_car(
+		brand,
+		series,
+		price,
+		licensing_time,
+		level,
+		gearbox,
+		output_volume,
+		mileage,
+		location,
+		pic,
+		summary,
+		create_time
+		)values(
+		#{brand},
+		#{series},
+		#{price},
+		#{licensingTime},
+		#{level},
+		#{gearbox},
+		#{outputVolume},
+		#{mileage},
+		#{location},
+		#{pic},
+		#{summary},
+		NOW()
+		)
+	</insert>
+
+	<select id="queryList" parameterType="CarVo" resultType="carVo">
+		select t.id
+		,t.brand
+		,t.series
+		,t.price
+		,t.licensing_time As licensingTime
+		,t.level
+		,t.gearbox
+		,t.output_volume AS outputVolume
+		,t.mileage
+		,t.location
+		,t.pic
+		,t.summary
+		,t.create_time
+		,t2.name AS levelName
+		,t3.name AS gearboxName
+		,t4.name AS outputVolumeName
+		from t_springmvc_car t
+		left join t_springmvc_dict t2 on t.level = t2.value and t2.group_id =
+		'level'
+		left join t_springmvc_dict t3 on t.level = t3.value and t3.group_id =
+		'gearbox'
+		left join t_springmvc_dict t4 on t.level = t4.value and t4.group_id =
+		'output_volume'
+	</select>
+
+	<select id="getAllBrand" resultType="string">
+		select brand
+		from t_springmvc_car
+		group by brand
+	</select>
+
+	<!--查询所有车系  -->
+	<select id="getSeriesByBrand" parameterType="string"
+		resultType="string">
+		select series
+		from t_springmvc_car
+		<where>
+			<if test="brand != null and brand !='' ">
+				brand = #{brand}
+			</if>
+		</where>
+		group by series
+		<if test="brand == null OR brand == '' ">
+			limit 10
+		</if>
+	</select>
+</mapper>

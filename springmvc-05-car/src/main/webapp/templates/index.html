@@ -43,28 +43,7 @@
 	<script th:inline="javascript" type="text/javascript">
 		const path= /*[[${#request.getContextPath()}]]*/
 		
-		$(function(){
-			console.log("dsfa")
-			outputvolume();
-		})
 		
-		function outputvolume(){
-			$.ajax({
-
-				url:path+'/car/output_volume',
-				type:'post',
-				data:'level',
-				dataType:'json',
-				contentType:'application/json;charset=UTF-8',
-				let str = "<option value='-1'>==请选择==</option>"
-				success:function(data){
-					$.each(data,(index,da)=>{
-						str +="<option value="+index+">"+da.name+"</option>"
-					})
-					$("#level").html(str);
-				}
-			})
-		}
 	</script>
 </body>
 </html>

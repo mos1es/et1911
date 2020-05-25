@@ -17,7 +17,7 @@
 		<module>springmvc-05-car</module>
 	</modules>
 
-	<!-- 作用:声明依赖（管理依赖），但是不引入依赖，由子工程 -->
+	<!-- 作用:声明依赖（管理依赖），但是不引入依赖，由子工程决定自己需要的依赖 -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -120,6 +120,13 @@
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>1.3.3</version>
+			</dependency>
+			
+			<!--使用hibernate-validator实现后端校验  -->
+			<dependency>
+				<groupId>org.hibernate.validator</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>6.1.2.Final</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

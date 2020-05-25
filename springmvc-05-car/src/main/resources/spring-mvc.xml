@@ -19,6 +19,9 @@
 		<context:include-filter type="annotation" 
 		expression="org.springframework.web.bind.annotation.RestController"/>
 		
+		<context:include-filter type="annotation" 
+		expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+		
 		<!--排除@Service @Repository  -->
 		<context:exclude-filter type="annotation" 
 		expression="org.springframework.stereotype.Service"/>

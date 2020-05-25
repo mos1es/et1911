@@ -24,7 +24,7 @@
   		org.springframework.web.context.ContextLoaderListener
   	</listener-class>
   </listener>
-  <!--如果不配置这个参数 那么contextConfigLoader   -->
+  <!--如果不配置这个参数 那么ContextLoaderListener默认读取/WEB-INF/applicationContext.xml  -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath:spring-root.xml</param-value>
@@ -46,8 +46,5 @@
   	<servlet-name>et</servlet-name>
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
-  
-  
-  
   
 </web-app>

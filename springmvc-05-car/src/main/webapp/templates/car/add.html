@@ -13,6 +13,9 @@
 </style>
 </head>
 <body>
+	<div>
+		<span th:text="${paramerror}"></span>
+	</div>
 	<div id="form">
 		<form id="addForm" 
 		th:action="@{/car/add}" method="post"
@@ -65,7 +68,7 @@
 
 			<!-- 6.变速箱 -->
 			<div class="form-group">
-				<label for="gearbox" class="col-sm-2 control-label">变数箱</label>
+				<label for="gearbox" class="col-sm-2 control-label">变速箱</label>
 				<div class="col-sm-6 input-group" id="gearbox"></div>
 			</div>
 
@@ -150,7 +153,8 @@
 		et1911.querySelectDict('level');
 		et1911.querySelectDict('output_volume');
 		et1911.queryGearbox();
-		et1911.validateForm();
+		
+		//et1911.validateForm();
 	})
 	
 	let et1911 = {
@@ -181,7 +185,7 @@
 				success:function(div){
 					div.addClass('input-group-addon').text('ok');
 				},
-				
+			
 				rules:{//校验规则
 					brand:'required',//key是表单项的name属性值
 					series:'required',
