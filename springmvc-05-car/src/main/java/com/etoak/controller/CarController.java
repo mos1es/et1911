@@ -64,7 +64,8 @@ public class CarController {
 	
 	
 	@RequestMapping("/add")
-	public String add(MultipartFile file, @Valid Car car, BindingResult bindingresult, HttpServletRequest request)
+	public String add(MultipartFile file, @Valid Car car, BindingResult bindingresult
+			, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 		log.info("文件名称 - {}", file.getOriginalFilename());
 		log.info("param car -{}", car);
@@ -111,8 +112,9 @@ public class CarController {
 	@ResponseBody
 	public PageVo<CarVo> queryList(
 			@RequestParam(required = false,defaultValue="1") int pageNum,
-			@RequestParam(required = false,defaultValue="1") int pageSize,CarVo carVo){
-		return carservice.queryList(pageNum, pageSize, carVo);
+			@RequestParam(required = false,defaultValue="1") int pageSize,CarVo carVo,
+			String[] priceList){
+		return carservice.queryList(pageNum, pageSize, carVo,priceList);
 		
 	}
 	
